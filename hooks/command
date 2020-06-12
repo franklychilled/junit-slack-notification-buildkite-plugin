@@ -28,6 +28,12 @@ buildkite-agent artifact download \
   "${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_ARTIFACTS}" \
   "$artifacts_dir"
 
+echo "--- Compile Typescript"
+make build
+
+echo "--- Send message"
+make run
+
 #echo "--- :junit: Processing the junits"
 #
 #docker \
