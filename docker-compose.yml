@@ -13,3 +13,5 @@ services:
       BUILDKITE_COMMIT: ${BUILDKITE_COMMIT}
       BUILDKITE_BUILD_AUTHOR: ${BUILDKITE_BUILD_AUTHOR}
     command: node /app/dist/index.js
+    volumes:
+      - $ARTIFACTS_DIR:/reports

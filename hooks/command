@@ -7,47 +7,25 @@ MAX_SIZE=1024 # in KB
 
 echo "--- :junit: Download the junits"
 
-artifacts_dir="$(pwd)/$(mktemp -d "nightwatch-slack-notification-plugin-artifacts-tmp.XXXXXXXXXX")"
-annotation_dir="$(pwd)/$(mktemp -d "nightwatch-slack-notification-plugin-annotation-tmp.XXXXXXXXXX")"
-annotation_path="${annotation_dir}/annotation.md"
+ARTIFACTS_DIR="$(pwd)/$(mktemp -d "nightwatch-slack-notification-plugin-artifacts-tmp.XXXXXXXXXX")"
 
 function cleanup {
-  rm -rf "${artifacts_dir}"
-  rm -rf "${annotation_dir}"
-}
-
-function check_size {
-  local size_in_kb
-  size_in_kb=$(du -k "${annotation_path}" | cut -f 1)
-  [ "${size_in_kb}" -lt "${MAX_SIZE}" ]
+  rm -rf "${ARTIFACTS_DIR}"
 }
 
 trap cleanup EXIT
 
-buildkite-agent artifact download \
-  "${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_ARTIFACTS}" \
-  "$artifacts_dir"
-
-echo "--- Compile Typescript"
 echo "$PLUGIN_DIR"
 cd "$PLUGIN_DIR"
 
+buildkite-agent artifact download \
+  "${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_ARTIFACTS}" \
+  "$ARTIFACTS_DIR"
+
+echo "--- Compile Typescript"
 make build
 
 echo "--- Send message"
 echo "token: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_TOKEN}"
 echo "channel: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_CHANNEL}"
 make run
-
-#echo "--- :junit: Processing the junits"
-#
-#docker \
-#  --log-level "error" \
-#  run \
-#    --rm \
-#    --volume "$artifacts_dir:/junits" \
-#    --volume "$PLUGIN_DIR/ruby:/src" \
-#    --env "BUILDKITE_PLUGIN_JUNIT_ANNOTATE_JOB_UUID_FILE_PATTERN=${BUILDKITE_PLUGIN_JUNIT_ANNOTATE_JOB_UUID_FILE_PATTERN:-}" \
-#    --env "BUILDKITE_PLUGIN_JUNIT_ANNOTATE_FAILURE_FORMAT=${BUILDKITE_PLUGIN_JUNIT_ANNOTATE_FAILURE_FORMAT:-}" \
-#    ruby:2.5-alpine ruby /src/bin/annotate /junits \
-#      > "$annotation_path"
