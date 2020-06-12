@@ -1,1 +1,1 @@
-# -nightwatch-slack-notification-buildkite-plugin
+# Nightwatch - slack notification buildkite plugin
