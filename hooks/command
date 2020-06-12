@@ -29,6 +29,8 @@ buildkite-agent artifact download \
   "$artifacts_dir"
 
 echo "--- Compile Typescript"
+cd "$PLUGIN_DIR"
+
 make build
 
 echo "--- Send message"
