@@ -29,11 +29,14 @@ buildkite-agent artifact download \
   "$artifacts_dir"
 
 echo "--- Compile Typescript"
+echo "$PLUGIN_DIR"
 cd "$PLUGIN_DIR"
 
 make build
 
 echo "--- Send message"
+echo "token: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_TOKEN}"
+echo "channel: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_CHANNEL}"
 make run
 
 #echo "--- :junit: Processing the junits"

@@ -13,6 +13,6 @@ configuration:
       type: string
   required:
     - artifacts
-#    - SLACK_TOKEN
-#    - SLACK_CHANNEL
+    - SLACK_TOKEN
+    - SLACK_CHANNEL
   additionalProperties: false
