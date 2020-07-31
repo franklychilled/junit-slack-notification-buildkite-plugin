@@ -27,6 +27,7 @@ node_modules
 bower_components
 
 # Editors
+.idea/**/*
 .idea
 *.iml
 
@@ -41,3 +42,4 @@ dist/**/*
 yarn.lock
 
 reports/**/*
+reports

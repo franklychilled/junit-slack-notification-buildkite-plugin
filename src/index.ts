@@ -22,5 +22,6 @@ import { addStatsToCommit } from "./testcaseStats";
 
   const testsuites = await parseFiles();
   const result = await addStatsToCommit(testsuites, commit);
-  await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result).then(() => console.log("completed."));
+  await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result)
+      .then(() => console.log("completed."));
 })();
