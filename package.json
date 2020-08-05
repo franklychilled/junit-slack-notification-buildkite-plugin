@@ -18,7 +18,7 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.157",
+    "@types/lodash": "^4.14.158",
     "@types/xml2js": "^0.4.5",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.8.0",
