@@ -17,7 +17,7 @@ import { addStatsToCommit } from "./testcaseStats";
     tests_ignored: 0
   };
 
-  const SLACK_TOKEN = process.env.SLACK_TOKEN;
+  const SLACK_TOKEN  process.env.SLACK_TOKEN;
   const SLACK_CHANNEL = process.env.SLACK_CHANNEL;
 
   const testsuites = await parseFiles();
