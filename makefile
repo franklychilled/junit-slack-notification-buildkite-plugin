@@ -4,7 +4,7 @@ SHELL := /bin/bash
 BUILDKITE_BUILD_NUMBER ?= local
 IMAGE_NAME ?= slack-notification
 
-test: build run_tests
+test: build run
 
 build:
 	echo building $(IMAGE_NAME):build-${BUILDKITE_BUILD_NUMBER}
