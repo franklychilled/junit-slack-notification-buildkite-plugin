@@ -8,6 +8,7 @@ MAX_SIZE=1024 # in KB
 echo "--- :junit: Download the junits"
 
 ARTIFACTS_DIR="$(pwd)/$(mktemp -d "nightwatch-slack-notification-plugin-artifacts-tmp.XXXXXXXXXX")"
+export ARTIFACTS_DIR
 
 function cleanup {
   rm -rf "${ARTIFACTS_DIR}"
@@ -26,6 +27,7 @@ echo "--- Compile Typescript"
 make build
 
 echo "--- Send message"
-echo "token: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_TOKEN}"
+#echo "token: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_TOKEN}" | cut -c1-8
 echo "channel: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_CHANNEL}"
+echo "ARTIFACTS_DIR: $ARTIFACTS_DIR"
 make run
