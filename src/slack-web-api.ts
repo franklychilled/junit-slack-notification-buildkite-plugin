@@ -9,7 +9,10 @@ interface ChatPostMessageResult extends WebAPICallResult {
 }
 
 export const sendSlackMessage = async (slackToken: string, channel:string,  attachments: any[]) => {
-  // const channel:string = SLACK_CHANNEL;
+  console.log(
+      `Sending message to conversation ${channel} which contains the message ${JSON.stringify(attachments)}`
+  );
+  console.log("Connecting using " + slackToken.substring(0, 8) + "...");
   const web = new WebClient(slackToken);
 
   // The result is cast to the interface
