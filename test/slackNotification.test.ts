@@ -51,7 +51,7 @@ describe("Failed test", () => {
   });
 
   xit("send message to slack channel",  async (done) => {
-    const SLACK_TOKEN = "xoxb-81534569220-1172879139954-meWCu1UEHiROrgOFX5n4CWuM";
+    const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
     const SLACK_CHANNEL = "hac-483_testing";
 
     await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result);
@@ -103,7 +103,7 @@ describe("Passed test", () => {
   });
 
   xit("send message to slack channel",  async (done) => {
-    const SLACK_TOKEN = "xoxb-81534569220-1172879139954-meWCu1UEHiROrgOFX5n4CWuM";
+    const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
     const SLACK_CHANNEL = "hac-483_testing";
 
     await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result);
@@ -134,20 +134,20 @@ describe("No tests", () => {
         "blocks": [
           {
             "text": {
-              "text": ":+1: *My Build other pipeline (hac-483_other_branch) #789*\nSecond commit - Frankly Chilled (a1b2c3d4)\n*No tests detected*\n<https://www.iress.com/myotherbuild|View build>",
+              "text": ":-1: *My Build other pipeline (hac-483_other_branch) #789*\nSecond commit - Frankly Chilled (a1b2c3d4)\n*No tests data generated!*\n<https://www.iress.com/myotherbuild|View build>",
               "type": "mrkdwn"
             },
             "type": "section"
           }
         ],
-        "color": "#69A76A"
+        "color": "#B94A48"
       }
     ]);
     done();
   });
 
   xit("send message to slack channel",  async (done) => {
-    const SLACK_TOKEN = "xoxb-81534569220-1172879139954-meWCu1UEHiROrgOFX5n4CWuM";
+    const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
     const SLACK_CHANNEL = "hac-483_testing";
 
     await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result);

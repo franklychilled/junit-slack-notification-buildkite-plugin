@@ -5,12 +5,20 @@ export const getColor = (result: NightWatchResult): string => {
     if (result.tests_failed > 0) {
         return "#B94A48";
     }
+    const summary = getSummary(result);
+    if (summary.length === 0) {
+        return "#B94A48";
+    }
     return "#69A76A";
 };
 
 export const getEmoij = (result: NightWatchResult): string => {
     if (result.tests_failed > 0) {
         return ":-1: :-1:";
+    }
+    const summary = getSummary(result);
+    if (summary.length === 0) {
+        return ":-1:";
     }
     return ":+1:";
 };
@@ -34,7 +42,7 @@ export const getTextSummaryLine = (result: NightWatchResult): string => {
     if (summary.length > 0) {
         return `Tests ${summary.join(", ")}`;
     }
-    return "No tests detected";
+    return "No tests data generated!";
 };
 
 export const getText = (result: NightWatchResult): string => {
