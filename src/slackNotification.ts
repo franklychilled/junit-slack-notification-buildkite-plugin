@@ -64,7 +64,7 @@ export const sendResultToSlack = async (slackToken: string, channel: string, nig
         if (checkChar(slackToken[i])) {
             goodToken += slackToken[i];
         } else {
-            console.log("invalid character: " + slackToken[i]);
+            console.log(`Invalid character in token - code: ${slackToken.charCodeAt(i)} => ${slackToken[i]}'`);
         }
     }
     return sendSlackMessage(goodToken, channel, getSlackMessageAttachments(nightwatchResult));
