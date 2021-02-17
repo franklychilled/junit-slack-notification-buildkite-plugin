@@ -1,13 +1,11 @@
 #!/bin/bash
 
-set -euo pipefail
-
 PLUGIN_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)/.."
 MAX_SIZE=1024 # in KB
 
-echo "--- :junit: Download the junits"
+echo "--- :junit: Download the junits XML"
 
-ARTIFACTS_DIR="$(pwd)/$(mktemp -d "nightwatch-slack-notification-plugin-artifacts-tmp.XXXXXXXXXX")"
+ARTIFACTS_DIR="$(pwd)/$(mktemp -d "junits-slack-notification-plugin-artifacts-tmp.XXXXXXXXXX")"
 export ARTIFACTS_DIR
 
 function cleanup {
@@ -19,15 +17,14 @@ trap cleanup EXIT
 echo "$PLUGIN_DIR"
 cd "$PLUGIN_DIR"
 
+# Allows no files downloaded
 buildkite-agent artifact download \
   "${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_ARTIFACTS}" \
   "$ARTIFACTS_DIR"
 
+set -euo pipefail
 echo "--- Compile Typescript"
 make build
 
-echo "--- Send message"
-#echo "token: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_TOKEN}" | cut -c1-8
-echo "channel: ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_CHANNEL}"
-echo "ARTIFACTS_DIR: $ARTIFACTS_DIR"
+echo "--- Send message to ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_CHANNEL}"
 make run
