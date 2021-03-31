@@ -1,9 +1,23 @@
-import { TestCasesStats } from "./interfaces/testCasesStats.interface";
-import { NightWatchResult } from "./interfaces/nightWatchResult.interface";
+import {TestCasesStats} from "./interfaces/testCasesStats.interface";
+import {NightWatchResult} from "./interfaces/nightWatchResult.interface";
 
 import * as _ from "lodash";
 
 export const stats = (reportfile: any) => {
+  function extractedTestSuite(): any[] {
+    if (typeof reportfile["testsuites"] !== "undefined"){
+      const testsuites: any = reportfile["testsuites"];
+      return testsuites["testsuite"];
+    }
+    if (typeof reportfile["testsuite"] === "object") {
+      return [reportfile["testsuite"]];
+    }
+    if (typeof reportfile["testsuite"] !== "undefined") {
+      return reportfile["testsuite"];
+    }
+    throw new Error("No test suite found");
+  }
+
   try {
     const result: TestCasesStats = {
       failed: 0,
@@ -11,8 +25,8 @@ export const stats = (reportfile: any) => {
       passed: 0
     };
     // const root: any = reportfile['testsuites'];
-    const testsuites: any = reportfile["testsuites"];
-    const testsuiteArray: any[] = testsuites["testsuite"];
+
+    const testsuiteArray = extractedTestSuite();
     if (typeof testsuiteArray !== "undefined") {
       result.ignored = _.sumBy(testsuiteArray, (testsuite: any) => {
         const testcaseArray: any[] = testsuite["testcase"];

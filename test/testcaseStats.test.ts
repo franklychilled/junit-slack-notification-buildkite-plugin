@@ -553,7 +553,111 @@ describe("Convert test cases statistics", () => {
         done();
     });
 
-
+    it("should parse all JSON files with testcase stats even if there is no Suite", async (done) => {
+        const fileWithNoTestsuites = [
+            {
+                "testsuite": {
+                    "$": {
+                        "name": "Chrome Headless 89.0.4389.90 (Linux x86_64)",
+                        "package": "",
+                        "timestamp": "2021-03-31T13:50:26",
+                        "id": "0",
+                        "hostname": "9ebcadfd370b",
+                        "tests": "737",
+                        "errors": "0",
+                        "failures": "7",
+                        "time": "3.372"
+                    },
+                    "properties": [
+                        {
+                            "property": [
+                                {
+                                    "$": {
+                                        "name": "browser.fullName",
+                                        "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/89.0.4389.90 Safari/537.36"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "testcase": [
+                        {
+                            "$": {
+                                "name": "Service: performance Overview Service (getPeriodicData) Tests getPeriodicData should return correct response for a single discretionary account, (PERIODIC-01)",
+                                "time": "0.026",
+                                "classname": "Chrome_Headless_89_0_4389_90_(Linux_x86_64).Service: performance Overview Service (getPeriodicData) Tests getPeriodicData"
+                            }
+                        },
+                        {
+                            "$": {
+                                "name": "Component: Tabs2 Directive Tests should create correct markup for Percentage tab",
+                                "time": "0.026",
+                                "classname": "Chrome_Headless_89_0_4389_90_(Linux_x86_64).Component: Tabs2 Directive Tests"
+                            },
+                            "failure": [
+                                {
+                                    "_": "Error: Unexpected request: GET http://localhost:8144/resourceful/entity/client/1299?fields.0=login_restriction&fields.1=login_restriction_message_text\nNo more request expected\nError: Unexpected request: GET http://localhost:8144/resourceful/entity/client/1299?fields.0=login_restriction&fields.1=login_restriction_message_text\nNo more request expected\n    at $httpBackend (node_modules/angular-mocks/angular-mocks.js:1450:9)\n    at sendReq (node_modules/angular/angular.js:12720:9)\n    at serverRequest (node_modules/angular/angular.js:12461:16)\n    at processQueue (node_modules/angular/angular.js:17330:37)\n    at node_modules/angular/angular.js:17378:27\n    at Scope.$digest (node_modules/angular/angular.js:18515:15)\n    at UserContext.<anonymous> (test/spec/directives/tabs2Tests.js:99:16)\n    at <Jasmine>\n",
+                                    "$": {
+                                        "type": ""
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "testsuite": {
+                    "$": {
+                        "name": "HeadlessChrome 88.0.4324 (Linux 0.0.0)",
+                        "package": "",
+                        "timestamp": "2021-03-01T16:22:57",
+                        "id": "0",
+                        "hostname": "1d1b166f2581",
+                        "tests": "875",
+                        "errors": "0",
+                        "failures": "0",
+                        "time": "16.157"
+                    },
+                    "properties": [
+                        {
+                            "property": [
+                                {
+                                    "$": {
+                                        "name": "browser.fullName",
+                                        "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/88.0.4324.182 Safari/537.36"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "testcase": [
+                        {
+                            "$": {
+                                "name": "Service: Umbraco Api initApi should get the umbraco url except if the api name is not defined",
+                                "time": "0.018",
+                                "classname": "HeadlessChrome_88_0_4324_(Linux_0_0_0).Service: Umbraco Api initApi should get the umbraco url"
+                            }
+                        },
+                    ]
+                }
+            }
+        ];
+        const actual = await allStats(fileWithNoTestsuites);
+        expect(actual).toStrictEqual([
+            {
+                "failed": 1,
+                "ignored": 0,
+                "passed": 1
+            },
+            {
+                "failed": 0,
+                "ignored": 0,
+                "passed": 1
+            }
+        ]);
+        done();
+    });
 });
 
 describe("Combine all statistics", () => {
