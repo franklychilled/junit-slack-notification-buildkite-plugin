@@ -61,7 +61,7 @@ describe("Convert test cases statistics", () => {
               "failures": "1",
               "hostname": "",
               "id": "",
-              "name": "contingency.contingencyTextCBAMUser",
+              "name": "contingency.contingencyTextUser",
               "package": "contingency",
               "skipped": "0",
               "tests": "1",
@@ -69,14 +69,14 @@ describe("Convert test cases statistics", () => {
               "timestamp": ""
             },
             "system-err": [
-              "\n            [0;31m Error: Case file not found: ../fixtures/cbamtest/client/factFindSingle.json[0m\n            [0;90m at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n            at Function.loadCase (/app/pages/caseLoading.js:73:29)\n            at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n            at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n            at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find\n            journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n        "
+              "\n            [0;31m Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n            [0;90m at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n            at Function.loadCase (/app/pages/caseLoading.js:73:29)\n            at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n            at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n            at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find\n            journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n        "
             ],
             "testcase": [
               {
                 "$": {
                   "assertions": "196",
-                  "classname": "contingency.contingencyTextCBAMUser",
-                  "name": "contingency/contingencyTextCBAMUser - User navigates to Contingency screens for text validation",
+                  "classname": "contingency.contingencyTextUser",
+                  "name": "contingency/contingencyTextUser - User navigates to Contingency screens for text validation",
                   "time": "179.4"
                 },
                 "failure": [
@@ -84,17 +84,17 @@ describe("Convert test cases statistics", () => {
                     "$": {
                       "message": "Timed out while waiting for element <a[href*='/accountOpening']> to be present for 120000 milliseconds. - expected [0;32m\"visible\"[0m but got: [0;31m\"not found\"[0m [0;90m(120004ms)[0m"
                     },
-                    "_": "\n                at SearchInvestmentsCBAM.selectOpenAccount\n                (/app/pages/searchInvestments/searchInvestmentsCBAM.js:502:14)\n                at Object.contingency/contingencyTextCBAMUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextCBAMUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                    "_": "\n                at SearchInvestments.selectOpenAccount\n                (/app/pages/searchInvestments/searchInvestments.js:502:14)\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
                   },
                   {
                     "$": {
-                      "message": "    at SearchInvestmentsCBAM.selectOpenAccount (/app/pages/searchInvestments/searchInvestmentsCBAM.js:502:14)"
+                      "message": "    at SearchInvestments.selectOpenAccount (/app/pages/searchInvestments/searchInvestments.js:502:14)"
                     },
-                    "_": "\n                at Object.contingency/contingencyTextCBAMUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextCBAMUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                    "_": "\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
                   }
                 ],
                 "system-out": [
-                  "\n                [[ATTACHMENT|/reports/contingency/contingencyTextCBAMUser/contingency/contingencyTextCBAMUser---User-navigates-to-Contingency-screens-for-text-validation_FAILED_Jun-11-2020-181545-GMT+0000-(Coordinated-Universal.png]]\n            "
+                  "\n                [[ATTACHMENT|/reports/contingency/contingencyTextUser/contingency/contingencyTextUser---User-navigates-to-Contingency-screens-for-text-validation_FAILED_Jun-11-2020-181545-GMT+0000-(Coordinated-Universal.png]]\n            "
                 ]
               }
             ]
@@ -133,7 +133,7 @@ describe("Convert test cases statistics", () => {
               "timestamp": ""
             },
             "system-err": [
-              "\n      [0;31m  Error: Case file not found: ../fixtures/cbamtest/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
+              "\n      [0;31m  Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
             ],
             "testcase": [
               {
@@ -193,7 +193,7 @@ describe("Convert test cases statistics", () => {
               {
                 "$": {
                   "classname": "register.register",
-                  "name": "Create a new PWC Current Partner"
+                  "name": "Create a new  Current Partner"
                 },
                 "skipped": [
                   ""
@@ -202,7 +202,7 @@ describe("Convert test cases statistics", () => {
               {
                 "$": {
                   "classname": "register.register",
-                  "name": "Create a new PWC Dependant linked to Current Partner"
+                  "name": "Create a new  Dependant linked to Current Partner"
                 },
                 "skipped": [
                   ""
@@ -211,7 +211,7 @@ describe("Convert test cases statistics", () => {
               {
                 "$": {
                   "classname": "register.register",
-                  "name": "Create a new PWC Spouse Linked to Currewnt "
+                  "name": "Create a new  Spouse Linked to Currewnt "
                 },
                 "skipped": [
                   ""
@@ -281,7 +281,7 @@ describe("Convert test cases statistics", () => {
                 "failures": "1",
                 "hostname": "",
                 "id": "",
-                "name": "contingency.contingencyTextCBAMUser",
+                "name": "contingency.contingencyTextUser",
                 "package": "contingency",
                 "skipped": "0",
                 "tests": "1",
@@ -289,14 +289,14 @@ describe("Convert test cases statistics", () => {
                 "timestamp": ""
               },
               "system-err": [
-                "\n            [0;31m Error: Case file not found: ../fixtures/cbamtest/client/factFindSingle.json[0m\n            [0;90m at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n            at Function.loadCase (/app/pages/caseLoading.js:73:29)\n            at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n            at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n            at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find\n            journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n        "
+                "\n            [0;31m Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n            [0;90m at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n            at Function.loadCase (/app/pages/caseLoading.js:73:29)\n            at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n            at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n            at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find\n            journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n        "
               ],
               "testcase": [
                 {
                   "$": {
                     "assertions": "196",
-                    "classname": "contingency.contingencyTextCBAMUser",
-                    "name": "contingency/contingencyTextCBAMUser - User navigates to Contingency screens for text validation",
+                    "classname": "contingency.contingencyTextUser",
+                    "name": "contingency/contingencyTextUser - User navigates to Contingency screens for text validation",
                     "time": "179.4"
                   },
                   "failure": [
@@ -304,17 +304,17 @@ describe("Convert test cases statistics", () => {
                       "$": {
                         "message": "Timed out while waiting for element <a[href*='/accountOpening']> to be present for 120000 milliseconds. - expected [0;32m\"visible\"[0m but got: [0;31m\"not found\"[0m [0;90m(120004ms)[0m"
                       },
-                      "_": "\n                at SearchInvestmentsCBAM.selectOpenAccount\n                (/app/pages/searchInvestments/searchInvestmentsCBAM.js:502:14)\n                at Object.contingency/contingencyTextCBAMUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextCBAMUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                      "_": "\n                at SearchInvestments.selectOpenAccount\n                (/app/pages/searchInvestments/searchInvestments.js:502:14)\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
                     },
                     {
                       "$": {
-                        "message": "    at SearchInvestmentsCBAM.selectOpenAccount (/app/pages/searchInvestments/searchInvestmentsCBAM.js:502:14)"
+                        "message": "    at SearchInvestments.selectOpenAccount (/app/pages/searchInvestments/searchInvestments.js:502:14)"
                       },
-                      "_": "\n                at Object.contingency/contingencyTextCBAMUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextCBAMUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                      "_": "\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
                     }
                   ],
                   "system-out": [
-                    "\n                [[ATTACHMENT|/reports/contingency/contingencyTextCBAMUser/contingency/contingencyTextCBAMUser---User-navigates-to-Contingency-screens-for-text-validation_FAILED_Jun-11-2020-181545-GMT+0000-(Coordinated-Universal.png]]\n            "
+                    "\n                [[ATTACHMENT|/reports/contingency/contingencyTextUser/contingency/contingencyTextUser---User-navigates-to-Contingency-screens-for-text-validation_FAILED_Jun-11-2020-181545-GMT+0000-(Coordinated-Universal.png]]\n            "
                   ]
                 }
               ]
@@ -344,7 +344,7 @@ describe("Convert test cases statistics", () => {
                 "timestamp": ""
               },
               "system-err": [
-                "\n      [0;31m  Error: Case file not found: ../fixtures/cbamtest/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
+                "\n      [0;31m  Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
               ],
               "testcase": [
                 {
@@ -404,7 +404,7 @@ describe("Convert test cases statistics", () => {
                 {
                   "$": {
                     "classname": "register.register",
-                    "name": "Create a new PWC Current Partner"
+                    "name": "Create a new  Current Partner"
                   },
                   "skipped": [
                     ""
@@ -413,7 +413,7 @@ describe("Convert test cases statistics", () => {
                 {
                   "$": {
                     "classname": "register.register",
-                    "name": "Create a new PWC Dependant linked to Current Partner"
+                    "name": "Create a new  Dependant linked to Current Partner"
                   },
                   "skipped": [
                     ""
@@ -422,7 +422,7 @@ describe("Convert test cases statistics", () => {
                 {
                   "$": {
                     "classname": "register.register",
-                    "name": "Create a new PWC Spouse Linked to Currewnt "
+                    "name": "Create a new  Spouse Linked to Currewnt "
                   },
                   "skipped": [
                     ""
@@ -455,13 +455,13 @@ describe("Convert test cases statistics", () => {
                 "timestamp": ""
               },
               "system-err": [
-                "\n      [0;31m  Error: Case file not found: ../fixtures/cbamtest/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
+                "\n      [0;31m  Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
               ],
               "testcase": [
                 {
                   "$": {
                     "classname": "umbraco.umbracoRegistration",
-                    "name": "umbraco/umbracoRegistration 1 - Self Directed CBAM client with an ISA, navigate back then forward"
+                    "name": "umbraco/umbracoRegistration 1 - Self Directed  client with an ISA, navigate back then forward"
                   },
                   "skipped": [
                     ""
@@ -470,7 +470,7 @@ describe("Convert test cases statistics", () => {
                 {
                   "$": {
                     "classname": "umbraco.umbracoRegistration",
-                    "name": "umbraco/umbracoRegistration 2 - Self Directed PwC client with an ISA, navigate back then forward"
+                    "name": "umbraco/umbracoRegistration 2 - Self Directed  client with an ISA, navigate back then forward"
                   },
                   "skipped": [
                     ""
