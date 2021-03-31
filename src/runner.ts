@@ -9,7 +9,7 @@ export const run = async () => {
         build_url: process.env.BUILDKITE_BUILD_URL,
         buildkite_pipeline: process.env.BUILDKITE_PIPELINE_NAME,
         git_branch_name: process.env.BUILDKITE_BRANCH,
-        git_comment: process.env.BUILDKITE_MESSAGE,
+        git_comment: process.env.BUILDKITE_MESSAGE.split("\n")[0],
         git_log: process.env.BUILDKITE_COMMIT.substring(0, 7),
         git_username: process.env.BUILDKITE_BUILD_AUTHOR,
         tests_failed: 0,
