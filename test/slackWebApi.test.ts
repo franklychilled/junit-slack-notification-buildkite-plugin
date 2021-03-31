@@ -19,9 +19,8 @@ beforeEach(() => {
     mockToken = undefined;
 });
 
-describe("Block name here", () => {
-
-    it("Test name here", async (done) => {
+describe("When calling sendSlackMessage", () => {
+    it("should call @slack/web-api WebClient chat.postMessage function", async (done) => {
         const slackToken: string = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx",
             channel: string = "my-channel",
             attachments: any[] = [
