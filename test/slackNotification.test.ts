@@ -1,6 +1,24 @@
 import { NightWatchResult } from "../src/interfaces/nightWatchResult.interface";
 import { getColor, getEmoij, getSummary, getSlackMessageAttachments, getText, getTextSummaryLine, sendResultToSlack } from "../src/slackNotification";
-import { describe, expect, it, xit } from "@jest/globals";
+import {beforeEach, describe, expect, it, xit} from "@jest/globals";
+
+const _postMessageMock = jest.fn(() => ({promise: true}));
+let mockToken: string;
+jest.mock("@slack/web-api", () => ({
+  WebClient: class {
+    constructor(token?: string) {
+      mockToken = token;
+    }
+    chat = {
+      postMessage: _postMessageMock
+    };
+  },
+}));
+
+beforeEach(() => {
+  jest.clearAllMocks();
+  mockToken = undefined;
+});
 
 describe("Failed test", () => {
   const result:NightWatchResult = {
@@ -50,11 +68,13 @@ describe("Failed test", () => {
     done();
   });
 
-  xit("send message to slack channel",  async (done) => {
-    const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
+  it("send message to slack channel",  async (done) => {
+    const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx\t";
     const SLACK_CHANNEL = "hac-483_testing";
 
     await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result);
+
+    expect(mockToken).toEqual("xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx");
 
     done();
   });
@@ -102,7 +122,7 @@ describe("Passed test", () => {
     done();
   });
 
-  xit("send message to slack channel",  async (done) => {
+  it("send message to slack channel",  async (done) => {
     const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
     const SLACK_CHANNEL = "hac-483_testing";
 
@@ -146,7 +166,7 @@ describe("No tests", () => {
     done();
   });
 
-  xit("send message to slack channel",  async (done) => {
+  it("send message to slack channel",  async (done) => {
     const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
     const SLACK_CHANNEL = "hac-483_testing";
 
