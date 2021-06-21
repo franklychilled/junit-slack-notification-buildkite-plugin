@@ -49,13 +49,13 @@ afterEach(() => {
 });
 
 describe("When the runner is called", () => {
-    it("should parse multi-line messages, add stats and send to slack", async (done) => {
+    it("should parse multi-line messages, add stats and send to slack", async () => {
         restore = mockedEnv({
             BUILDKITE_MESSAGE: `line 1
 line 2
 line 3`,
         });
-        const actual = await run();
+        await run();
         expect(parseFilesMock).toHaveBeenCalled();
         expect(addStatsToCommitMock).toHaveBeenCalledWith([], {
             "build_id": 123,
@@ -70,11 +70,11 @@ line 3`,
             "tests_passed": 0
         });
         expect(sendResultToSlackMock).toHaveBeenCalled();
-        done();
+        
     });
 
-    it("should parse, add stats and send to slack ", async (done) => {
-        const actual = await run();
+    it("should parse, add stats and send to slack ", async () => {
+        await run();
         expect(parseFilesMock).toHaveBeenCalled();
         expect(addStatsToCommitMock).toHaveBeenCalledWith([], {
             "build_id": 123,
@@ -89,6 +89,6 @@ line 3`,
             "tests_passed": 0
         });
         expect(sendResultToSlackMock).toHaveBeenCalled();
-        done();
+        
     });
 });

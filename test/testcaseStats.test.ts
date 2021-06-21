@@ -3,7 +3,7 @@ import {describe, expect, it} from "@jest/globals";
 import {NightWatchResult} from "../src/interfaces/nightWatchResult.interface";
 
 describe("Convert test cases statistics", () => {
-    it("should calculate passed test with testcase stats", async (done) => {
+    it("should calculate passed test with testcase stats", async () => {
         const testsuites = {
             "testsuites": {
                 "$": {
@@ -44,10 +44,10 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 1, ignored: 0, failed: 0});
 
-        done();
+        
     });
 
-    it("should calculate no test with wrong testsuite", async (done) => {
+    it("should calculate no test with wrong testsuite", async () => {
         const testsuites = {
                 "testsuites": {
                     "$": {
@@ -63,10 +63,10 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 0, ignored: 0, failed: 0});
 
-        done();
+        
     });
 
-    it("should calculate no test with no testsuites", async (done) => {
+    it("should calculate no test with no testsuites", async () => {
         const testsuites = {
             "testsuites": {
 
@@ -77,7 +77,7 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 0, ignored: 0, failed: 0});
 
-        done();
+        
     });
 
     it("should fail without testsuites", () => {
@@ -88,7 +88,7 @@ describe("Convert test cases statistics", () => {
             .toThrow();
     });
 
-    it("should calculate failed test with testcase stats", async (done) => {
+    it("should calculate failed test with testcase stats", async () => {
         const testsuites = {
             "testsuites": {
                 "$": {
@@ -149,10 +149,10 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 0, ignored: 0, failed: 1});
 
-        done();
+        
     });
 
-    it("should calculate skipped test with testcase stats", async (done) => {
+    it("should calculate skipped test with testcase stats", async () => {
         const testsuites = {
             "testsuites": {
                 "$": {
@@ -269,10 +269,10 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 0, ignored: 9, failed: 0});
 
-        done();
+        
     });
 
-    it("should parse all JSON files with testcase stats", async (done) => {
+    it("should parse all JSON files with testcase stats", async () => {
         const testsuites = [
             {
                 "testsuites": {
@@ -550,10 +550,10 @@ describe("Convert test cases statistics", () => {
             }
         ]);
 
-        done();
+        
     });
 
-    it("should parse all JSON files with testcase stats even if there is no Suite", async (done) => {
+    it("should parse all JSON files with testcase stats even if there is no Suite", async () => {
         const fileWithNoTestsuites = [
             {
                 "testsuite": {
@@ -656,12 +656,11 @@ describe("Convert test cases statistics", () => {
                 "passed": 1
             }
         ]);
-        done();
     });
 });
 
 describe("Combine all statistics", () => {
-    it("should add all results together", async (done) => {
+    it("should add all results together", async () => {
         const all = [
             {passed: 1, ignored: 0, failed: 0},
             {passed: 1, ignored: 0, failed: 1},
@@ -672,12 +671,11 @@ describe("Combine all statistics", () => {
 
         expect(actual).toStrictEqual({passed: 3, ignored: 1, failed: 1});
 
-        done();
     });
 });
 
 describe("Add Statistic to Commit", () => {
-    it("should add all results together", async (done) => {
+    it("should add all results together", async () => {
         const commit: NightWatchResult = {
             build_id: 1,
             build_url: "http://bk/build/1",
@@ -956,7 +954,5 @@ describe("Add Statistic to Commit", () => {
             tests_ignored: 11,
             tests_passed: 1
         });
-
-        done();
     });
 });
