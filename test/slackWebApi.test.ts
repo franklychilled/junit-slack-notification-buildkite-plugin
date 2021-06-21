@@ -20,7 +20,7 @@ beforeEach(() => {
 });
 
 describe("When calling sendSlackMessage", () => {
-    it("should call @slack/web-api WebClient chat.postMessage function", async (done) => {
+    it("should call @slack/web-api WebClient chat.postMessage function", async () => {
         const slackToken: string = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx",
             channel: string = "my-channel",
             attachments: any[] = [
@@ -42,6 +42,6 @@ describe("When calling sendSlackMessage", () => {
 
         expect(mockToken).toEqual(slackToken);
         expect(_postMessageMock).toHaveBeenCalledWith({"attachments": attachments, "channel": channel, "text": "" });
-        done();
+        
     });
 });

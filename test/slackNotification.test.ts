@@ -34,21 +34,21 @@ describe("Failed test", () => {
     tests_ignored: 2
   };
 
-  it("should return red", (done) => {
+  it("should return red", () => {
     const actual = getColor(result);
 
     expect(actual).toBe("#B94A48");
-    done();
+    
   });
 
-  it("should return negative emoij", (done) => {
+  it("should return negative emoij", () => {
     const actual = getEmoij(result);
 
     expect(actual).toBe(":-1: :-1:");
-    done();
+    
   });
 
-  it("should return summary slack message", (done) => {
+  it("should return summary slack message", () => {
     const actual = getSlackMessageAttachments(result);
 
     expect(actual).toStrictEqual([
@@ -65,10 +65,10 @@ describe("Failed test", () => {
           ]
         }
       ]);
-    done();
+    
   });
 
-  it("send message to slack channel",  async (done) => {
+  it("send message to slack channel",  async () => {
     const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx\t";
     const SLACK_CHANNEL = "hac-483_testing";
 
@@ -76,7 +76,7 @@ describe("Failed test", () => {
 
     expect(mockToken).toEqual("xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx");
 
-    done();
+    
   });
 });
 
@@ -94,15 +94,15 @@ describe("Passed test", () => {
     tests_ignored: 0
   };
 
-  it("should return green", (done) => {
+  it("should return green", () => {
 
     const actual = getColor(result);
 
     expect(actual).toBe("#69A76A");
-    done();
+    
   });
 
-  it("should return summary slack message", (done) => {
+  it("should return summary slack message", () => {
     const actual = getSlackMessageAttachments(result);
 
     expect(actual).toStrictEqual([
@@ -119,16 +119,16 @@ describe("Passed test", () => {
           "color": "#69A76A"
         }
       ]);
-    done();
+    
   });
 
-  it("send message to slack channel",  async (done) => {
+  it("send message to slack channel",  async () => {
     const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
     const SLACK_CHANNEL = "hac-483_testing";
 
     await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result);
 
-    done();
+    
   });
 });
 
@@ -146,7 +146,7 @@ describe("No tests", () => {
     tests_ignored: 0
   };
 
-  it("should return summary slack message", (done) => {
+  it("should return summary slack message", () => {
     const actual = getSlackMessageAttachments(result);
 
     expect(actual).toStrictEqual([
@@ -163,15 +163,15 @@ describe("No tests", () => {
         "color": "#B94A48"
       }
     ]);
-    done();
+    
   });
 
-  it("send message to slack channel",  async (done) => {
+  it("send message to slack channel",  async () => {
     const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
     const SLACK_CHANNEL = "hac-483_testing";
 
     await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result);
 
-    done();
+    
   });
 });

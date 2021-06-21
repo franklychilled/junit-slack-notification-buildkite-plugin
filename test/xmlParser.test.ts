@@ -3,7 +3,7 @@ import { describe, expect, it, xit } from "@jest/globals";
 
 describe("Parser test read slack-notification/reports folder", () => {
 
-  xit("should parse XML files with testcase results", async (done) => {
+  xit("should parse XML files with testcase results", async () => {
     const actual = await parseFiles();
     expect(actual).toStrictEqual([{
       "testsuites": {
@@ -40,7 +40,7 @@ describe("Parser test read slack-notification/reports folder", () => {
         ]
       }
     }]);
-    done();
+    
   });
 });
 
