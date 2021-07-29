@@ -1,1 +1,1 @@
-# Nightwatch - slack notification buildkite plugin
+# Nightwatch/Jest - slack notification buildkite plugin
