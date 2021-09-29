@@ -1,7 +1,7 @@
-import {NightWatchResult} from "./interfaces/nightWatchResult.interface";
+import {JunitResult} from "./interfaces/nightWatchResult.interface";
 import {sendSlackMessage} from "./slack-web-api";
 
-export const getColor = (result: NightWatchResult): string => {
+export const getColor = (result: JunitResult): string => {
     if (result.tests_failed > 0) {
         return "#B94A48";
     }
@@ -12,7 +12,7 @@ export const getColor = (result: NightWatchResult): string => {
     return "#69A76A";
 };
 
-export const getEmoij = (result: NightWatchResult): string => {
+export const getEmoij = (result: JunitResult): string => {
     if (result.tests_failed > 0) {
         return ":-1: :-1:";
     }
@@ -23,7 +23,7 @@ export const getEmoij = (result: NightWatchResult): string => {
     return ":+1:";
 };
 
-export const getSummary = (result: NightWatchResult): string[] => {
+export const getSummary = (result: JunitResult): string[] => {
     const summary = [];
     if (result.tests_failed > 0) {
         summary.push(`failed: ${result.tests_failed}`);
@@ -37,7 +37,7 @@ export const getSummary = (result: NightWatchResult): string[] => {
     return summary;
 };
 
-export const getTextSummaryLine = (result: NightWatchResult): string => {
+export const getTextSummaryLine = (result: JunitResult): string => {
     const summary = getSummary(result);
     if (summary.length > 0) {
         return `Tests ${summary.join(", ")}`;
@@ -45,11 +45,11 @@ export const getTextSummaryLine = (result: NightWatchResult): string => {
     return "No tests data generated!";
 };
 
-export const getText = (result: NightWatchResult): string => {
+export const getText = (result: JunitResult): string => {
     return `${getEmoij(result)} *${result.buildkite_pipeline} (${result.git_branch_name}) #${result.build_id}*\n${result.git_comment} - ${result.git_username} (${result.git_log})\n*${getTextSummaryLine(result)}*\n<${result.build_url}|View build>`;
 };
 
-export const getSlackMessageAttachments = (result: NightWatchResult): any => {
+export const getSlackMessageAttachments = (result: JunitResult): any => {
     return [
         {
             "color": getColor(result),
@@ -66,7 +66,7 @@ export const getSlackMessageAttachments = (result: NightWatchResult): any => {
     ];
 };
 
-export const sendResultToSlack = async (slackToken: string, channel: string, nightwatchResult: NightWatchResult): Promise<any> => {
+export const sendResultToSlack = async (slackToken: string, channel: string, junitResult: JunitResult): Promise<any> => {
     let goodToken = "";
     for (let i = 0; i < slackToken.length; i++) {
         if (checkChar(slackToken[i])) {
@@ -75,7 +75,7 @@ export const sendResultToSlack = async (slackToken: string, channel: string, nig
             console.log(`Invalid character in token - code: ${slackToken.charCodeAt(i)} => ${slackToken[i]}'`);
         }
     }
-    return sendSlackMessage(goodToken, channel, getSlackMessageAttachments(nightwatchResult));
+    return sendSlackMessage(goodToken, channel, getSlackMessageAttachments(junitResult));
 };
 
 const checkChar = (c: string) => {

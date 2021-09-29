@@ -1,10 +1,10 @@
-import { NightWatchResult } from "./interfaces/nightWatchResult.interface";
+import { JunitResult } from "./interfaces/nightWatchResult.interface";
 import { sendResultToSlack } from "./slackNotification";
 import { parseFiles } from "./xmlParser";
 import { addStatsToCommit } from "./testcaseStats";
 
 export const run = async () => {
-    const commit: NightWatchResult = {
+    const commit: JunitResult = {
         build_id: parseInt(process.env.BUILDKITE_BUILD_NUMBER, 10),
         build_url: process.env.BUILDKITE_BUILD_URL,
         buildkite_pipeline: process.env.BUILDKITE_PIPELINE_NAME,

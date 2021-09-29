@@ -19,12 +19,12 @@ cd "$PLUGIN_DIR"
 
 # Allows no files downloaded
 buildkite-agent artifact download \
-  "${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_ARTIFACTS}" \
+  "${BUILDKITE_PLUGIN_JUNIT_SLACK_NOTIFICATION_ARTIFACTS}" \
   "$ARTIFACTS_DIR"
 
 set -euo pipefail
 echo "--- Compile Typescript"
 make build
 
-echo "--- Send message to ${BUILDKITE_PLUGIN_NIGHTWATCH_SLACK_NOTIFICATION_SLACK_CHANNEL}"
+echo "--- Send message to ${BUILDKITE_PLUGIN_JUNIT_SLACK_NOTIFICATION_SLACK_CHANNEL}"
 make run

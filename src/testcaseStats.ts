@@ -1,5 +1,5 @@
 import {TestCasesStats} from "./interfaces/testCasesStats.interface";
-import {NightWatchResult} from "./interfaces/nightWatchResult.interface";
+import {JunitResult} from "./interfaces/nightWatchResult.interface";
 
 import * as _ from "lodash";
 
@@ -24,7 +24,6 @@ export const stats = (reportfile: any) => {
       ignored: 0,
       passed: 0
     };
-    // const root: any = reportfile['testsuites'];
 
     const testsuiteArray = extractedTestSuite();
     if (typeof testsuiteArray !== "undefined") {
@@ -80,17 +79,16 @@ export const allStats = (reportfiles: any[]) => {
 
 
 export const combineStats = (all: TestCasesStats[]) => {
-  const result: TestCasesStats = {
+  return {
     failed: _.sumBy(all, "failed"),
     ignored: _.sumBy(all, "ignored"),
     passed: _.sumBy(all, "passed")
   };
-  return result;
 };
 
-export const addStatsToCommit = async (reportfiles: any[], commit: NightWatchResult): Promise<NightWatchResult> => {
-  const ALL_STATS = await allStats(reportfiles);
-  const COMBINE_STATS = await combineStats(ALL_STATS);
+export const addStatsToCommit = async (reportfiles: any[], commit: JunitResult): Promise<JunitResult> => {
+  const ALL_STATS = allStats(reportfiles);
+  const COMBINE_STATS = combineStats(ALL_STATS);
   commit.tests_passed = COMBINE_STATS.passed;
   commit.tests_ignored = COMBINE_STATS.ignored;
   commit.tests_failed = COMBINE_STATS.failed;

@@ -1,4 +1,4 @@
-export interface NightWatchResult {
+export interface JunitResult {
   buildkite_pipeline: string,
   git_branch_name : string,
   build_id: number,

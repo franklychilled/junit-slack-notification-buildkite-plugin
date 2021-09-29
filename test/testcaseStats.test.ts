@@ -1,6 +1,6 @@
 import {addStatsToCommit, allStats, combineStats, stats} from "../src/testcaseStats";
 import {describe, expect, it} from "@jest/globals";
-import {NightWatchResult} from "../src/interfaces/nightWatchResult.interface";
+import {JunitResult} from "../src/interfaces/nightWatchResult.interface";
 
 describe("Convert test cases statistics", () => {
     it("should calculate passed test with testcase stats", async () => {
@@ -676,7 +676,7 @@ describe("Combine all statistics", () => {
 
 describe("Add Statistic to Commit", () => {
     it("should add all results together", async () => {
-        const commit: NightWatchResult = {
+        const commit: JunitResult = {
             build_id: 1,
             build_url: "http://bk/build/1",
             buildkite_pipeline: "bk_PIPELINE_NAME",

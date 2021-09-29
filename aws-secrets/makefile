@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
-name="nightwatch-summary-slack-bot-user-oauth-access-token"
-description="Nightwatch Summary Slack API Access token"
+name="junit-summary-slack-bot-user-oauth-access-token"
+description="Junit Summary Slack API Access token"
 RUN_AWS = @docker-compose run --rm --entrypoint bash aws_cli
 
 publishSecret:

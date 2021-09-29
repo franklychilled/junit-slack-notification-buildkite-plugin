@@ -1,4 +1,4 @@
-import { NightWatchResult } from "../src/interfaces/nightWatchResult.interface";
+import { JunitResult } from "../src/interfaces/nightWatchResult.interface";
 import { getColor, getEmoij, getSummary, getSlackMessageAttachments, getText, getTextSummaryLine, sendResultToSlack } from "../src/slackNotification";
 import {beforeEach, describe, expect, it, xit} from "@jest/globals";
 
@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 describe("Failed test", () => {
-  const result:NightWatchResult = {
+  const result:JunitResult = {
     tests_failed: 3,
     build_id: 123,
     build_url: "https://www.iress.com/mybuild",
@@ -81,7 +81,7 @@ describe("Failed test", () => {
 });
 
 describe("Passed test", () => {
-  const result:NightWatchResult = {
+  const result:JunitResult = {
     tests_failed: 0,
     build_id: 456,
     build_url: "https://www.iress.com/myotherbuild",
@@ -133,7 +133,7 @@ describe("Passed test", () => {
 });
 
 describe("No tests", () => {
-  const result:NightWatchResult = {
+  const result:JunitResult = {
     tests_failed: 0,
     build_id: 789,
     build_url: "https://www.iress.com/myotherbuild",

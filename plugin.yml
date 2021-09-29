@@ -1,6 +1,8 @@
-name: Nightwatch slack notification
-description: Notify Slack with a summary of the Nightwatch build
+name: Junit-slack-notification
+description: Notify Slack with a summary of the Junit build
 author: https://github.com/franklychilled
+main: index.js
+version: 1.0
 requirements:
   - docker
 configuration:
