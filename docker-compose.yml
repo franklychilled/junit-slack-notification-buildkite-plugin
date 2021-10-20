@@ -15,3 +15,8 @@ services:
     command: node /app/dist/index.js
     volumes:
       - $ARTIFACTS_DIR:/app/reports
+  lint:
+    image: buildkite/plugin-linter
+    command: ['--id', 'franklychilled/junit-slack-notification']
+    volumes:
+      - ".:/plugin:ro"

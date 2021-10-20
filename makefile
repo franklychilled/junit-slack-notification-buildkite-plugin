@@ -18,3 +18,6 @@ clean:
 
 prune:
 	docker system prune -f
+
+lint:
+	docker-compose run --rm lint
