@@ -13,6 +13,8 @@ configuration:
       type: string
     SLACK_CHANNEL:
       type: string
+    DOCKER_CACHE:
+      type: string
   required:
     - artifacts
     - SLACK_TOKEN

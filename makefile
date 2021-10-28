@@ -4,6 +4,8 @@ SHELL := /bin/bash
 BUILDKITE_BUILD_NUMBER ?= local
 IMAGE_NAME ?= slack-notification
 
+BUILDKITE_PLUGIN_JUNIT_SLACK_NOTIFICATION_DOCKER_CACHE ?=
+
 test: build run
 
 build:
