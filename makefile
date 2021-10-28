@@ -10,10 +10,10 @@ test: build run
 
 build:
 	echo building $(IMAGE_NAME):build-${BUILDKITE_BUILD_NUMBER}
-	docker build --tag=$(IMAGE_NAME):build-${BUILDKITE_BUILD_NUMBER} .
+	docker build --tag=$(IMAGE_NAME):build-${BUILDKITE_BUILD_NUMBER} --build-arg DOCKER_CACHE=${BUILDKITE_PLUGIN_JUNIT_SLACK_NOTIFICATION_DOCKER_CACHE} .
 
 run:
-	docker-compose  -f ./docker-compose.yml up --abort-on-container-exit
+	docker-compose -f ./docker-compose.yml up --abort-on-container-exit
 
 clean:
 	docker-compose down
@@ -22,4 +22,4 @@ prune:
 	docker system prune -f
 
 lint:
-	docker-compose run --rm lint
+	docker-compose -f ./docker-compose-lint.yml run --rm lint
