@@ -21,5 +21,5 @@ clean:
 prune:
 	docker system prune -f
 
-lint:
-	docker-compose -f ./docker-compose-lint.yml run --rm lint
+linter:
+	docker-compose -f ./docker-compose-linter.yml run --rm lint
