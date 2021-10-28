@@ -1,0 +1,7 @@
+version: "3"
+services:
+  lint:
+    image: buildkite/plugin-linter
+    command: ['--id', 'franklychilled/junit-slack-notification']
+    volumes:
+      - ".:/plugin:ro"

@@ -34,8 +34,8 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test
-      - name: Lint
-        run: npm run lint
+      - name: buildkite/plugin-linter
+        run: make linter
 
 #       - name: tsc
 #         # You may pin to the exact commit or the version.
