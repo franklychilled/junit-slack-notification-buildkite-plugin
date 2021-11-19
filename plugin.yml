@@ -1,4 +1,4 @@
-name: Junit-slack-notification
+name: Junit Slack Notification
 description: Notify Slack with a summary of the Junit build
 author: https://github.com/franklychilled
 main: index.js
