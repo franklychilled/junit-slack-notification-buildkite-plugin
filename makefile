@@ -23,3 +23,6 @@ prune:
 
 linter:
 	docker-compose -f ./docker-compose-linter.yml run --rm lint
+
+tester:
+	docker-compose -f ./docker-compose-tester.yml run --rm tests
