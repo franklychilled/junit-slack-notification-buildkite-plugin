@@ -31,7 +31,7 @@
     "supertest": "^6.1.6",
     "ts-jest": "^27.1.1",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.2",
+    "typescript": "^4.5.3",
     "util": "^0.12.4",
     "y18n": "^5.0.8"
   },
