@@ -95,3 +95,6 @@ npm run test
 3. Run the tests
 4. Commit and push your changes
 5. Send a pull request
+
+## Licence
+MIT License (See the included [Licence](LICENSE) file for more information).
