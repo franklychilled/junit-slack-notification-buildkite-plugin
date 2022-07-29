@@ -1,6 +1,6 @@
-import {addStatsToCommit, allStats, combineStats, stats} from "../src/testcaseStats";
+import {addStatsToCommit, allStats, combineStats, stats} from "./testcaseStats";
 import {describe, expect, it} from "@jest/globals";
-import {JunitResult} from "../src/interfaces/nightWatchResult.interface";
+import {JunitResult} from "./interfaces/nightWatchResult.interface";
 
 describe("Convert test cases statistics", () => {
     it("should calculate passed test with testcase stats", async () => {

@@ -1,5 +1,4 @@
 import {describe, expect, it, beforeEach} from "@jest/globals";
-import {sendResultToSlack} from "../src/slackNotification";
 import mockedEnv from "mocked-env";
 
 let restore = mockedEnv({
@@ -28,7 +27,7 @@ jest.mock("../src/testcaseStats", () => ({
     addStatsToCommit: addStatsToCommitMock
 }));
 
-import {run} from "../src/runner";
+import {run} from "./runner";
 
 beforeEach(() => {
     jest.clearAllMocks();

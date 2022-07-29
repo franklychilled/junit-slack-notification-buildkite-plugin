@@ -1,5 +1,5 @@
-import { parseFiles } from "../src/xmlParser";
-import { describe, expect, it, xit } from "@jest/globals";
+import { parseFiles } from "./xmlParser";
+import { describe, expect, xit } from "@jest/globals";
 
 describe("Parser test read slack-notification/reports folder", () => {
 

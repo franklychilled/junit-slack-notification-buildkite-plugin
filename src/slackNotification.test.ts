@@ -1,6 +1,6 @@
-import { JunitResult } from "../src/interfaces/nightWatchResult.interface";
-import { getColor, getEmoij, getSummary, getSlackMessageAttachments, getText, getTextSummaryLine, sendResultToSlack } from "../src/slackNotification";
-import {beforeEach, describe, expect, it, xit} from "@jest/globals";
+import { JunitResult } from "./interfaces/nightWatchResult.interface";
+import { getColor, getEmoij, getSlackMessageAttachments, sendResultToSlack } from "./slackNotification";
+import {beforeEach, describe, expect, it} from "@jest/globals";
 
 const _postMessageMock = jest.fn(() => ({promise: true}));
 let mockToken: string;
@@ -163,15 +163,11 @@ describe("No tests", () => {
         "color": "#B94A48"
       }
     ]);
-    
   });
 
   it("send message to slack channel",  async () => {
     const SLACK_TOKEN = "xoxb-00000000000-0000000000000-xxxxxxxxxxxxxxxxxxxxxxxx";
     const SLACK_CHANNEL = "hac-483_testing";
-
     await sendResultToSlack(SLACK_TOKEN, SLACK_CHANNEL, result);
-
-    
   });
 });
