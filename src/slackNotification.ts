@@ -1,4 +1,4 @@
-import {JunitResult} from "./interfaces/nightWatchResult.interface";
+import {JunitResult} from "./interfaces/junitResult.interface";
 import {sendSlackMessage} from "./slack-web-api";
 
 export const getColor = (result: JunitResult): string => {
@@ -12,7 +12,7 @@ export const getColor = (result: JunitResult): string => {
     return "#69A76A";
 };
 
-export const getEmoij = (result: JunitResult): string => {
+export const getEmoji = (result: JunitResult): string => {
     if (result.tests_failed > 0) {
         return ":-1: :-1:";
     }
@@ -46,7 +46,7 @@ export const getTextSummaryLine = (result: JunitResult): string => {
 };
 
 export const getText = (result: JunitResult): string => {
-    return `${getEmoij(result)} *${result.buildkite_pipeline} (${result.git_branch_name}) #${result.build_id}*\n${result.git_comment} - ${result.git_username} (${result.git_log})\n*${getTextSummaryLine(result)}*\n<${result.build_url}|View build>`;
+    return `${getEmoji(result)} *${result.buildkite_pipeline} (${result.git_branch_name}) #${result.build_id}*\n${result.git_comment} - ${result.git_username} (${result.git_log})\n*${getTextSummaryLine(result)}*\n<${result.build_url}|View build>`;
 };
 
 export const getSlackMessageAttachments = (result: JunitResult): any => {
@@ -72,7 +72,8 @@ export const sendResultToSlack = async (slackToken: string, channel: string, jun
         if (checkChar(slackToken[i])) {
             goodToken += slackToken[i];
         } else {
-            console.log(`Invalid character in token - code: ${slackToken.charCodeAt(i)} => ${slackToken[i]}'`);
+            // Allows debugging of unexpected character in token received without exposing the complete token.
+            console.warn(`Invalid character in token - code: ${slackToken.charCodeAt(i)} => '${slackToken[i]}'`);
         }
     }
     return sendSlackMessage(goodToken, channel, getSlackMessageAttachments(junitResult));

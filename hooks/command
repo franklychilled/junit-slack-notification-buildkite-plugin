@@ -17,7 +17,8 @@ trap cleanup EXIT
 echo "$PLUGIN_DIR"
 cd "$PLUGIN_DIR"
 
-# Allows no files downloaded
+# Allows files download to fail (FATAL  Failed to download artifacts: No artifacts found for downloading)
+# and send "No tests data generated!" message to slack in this scenario
 buildkite-agent artifact download \
   "${BUILDKITE_PLUGIN_JUNIT_SLACK_NOTIFICATION_ARTIFACTS}" \
   "$ARTIFACTS_DIR"

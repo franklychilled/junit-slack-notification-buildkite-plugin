@@ -1,38 +1,38 @@
-import * as fs from "fs";
-import * as util from "util";
-import * as path from "path";
-import * as xml2js from "xml2js";
-import * as _ from "lodash";
+import {readdir, readFile, stat} from "fs";
+import {promisify} from "util";
+import {join} from "path";
+import {Parser} from "xml2js";
+import {flattenDeep} from "lodash";
 
-// Convert fs.readFile into Promise version of same
-const readdir = util.promisify(fs.readdir);
-const readFile = util.promisify(fs.readFile);
-const stat = util.promisify(fs.stat);
-const parser = new xml2js.Parser();
+// Convert sync functions into async
+const fsReaddir = promisify(readdir);
+const fsReadFile = promisify(readFile);
+const fsStat = promisify(stat);
+const xmlParser = new Parser();
 
 export const parseFiles = async () => {
-  const directoryPath = path.join(__dirname, "../reports");
-  const allContents = await parseFolder(directoryPath);
-  return _.flattenDeep(allContents);
+    const directoryPath = join(__dirname, "../reports");
+    const allContents = await parseFolder(directoryPath);
+    return flattenDeep(allContents);
 };
 
 export const parseFolder = async (baseDirectory: string): Promise<any[]> => {
-  const files: any[] = await readdir(baseDirectory);
-  return await Promise.all(files.map(async fileName => {
-    const fullPath = path.join(baseDirectory, fileName);
-    const stats = await stat(fullPath);
-    if (stats.isDirectory()){
-      // recursive
-      return await parseFolder(fullPath);
-    }
-    if (stats.isFile()){
-      console.log(`parsing ${fullPath}`);
-      return await parseFile(fullPath);
-    }
-  }));
+    const files: any[] = await fsReaddir(baseDirectory);
+    return Promise.all(files.map(async fileName => {
+        const fullPath = join(baseDirectory, fileName);
+        const stats = await fsStat(fullPath);
+        if (stats.isDirectory()) {
+            // recursive
+            return parseFolder(fullPath);
+        }
+        if (stats.isFile()) {
+            console.log(`parsing ${fullPath}`);
+            return parseFile(fullPath);
+        }
+    }));
 };
 
 export const parseFile = async (fileName: string) => {
-  const data: any = await readFile(fileName);
-  return await parser.parseStringPromise(data);
+    const data: any = await fsReadFile(fileName);
+    return xmlParser.parseStringPromise(data);
 };

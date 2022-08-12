@@ -38,11 +38,3 @@ jobs:
         run: make linter
       - name: buildkite/plugin-tester
         run: make tester
-
-#       - name: tsc
-#         # You may pin to the exact commit or the version.
-#         # uses: iCrawl/action-tsc@c3f25c126c7805dbbbcbf6f1db0c3be6f5dac069
-#         uses: icrawl/action-tsc@v1
-#      - name: tsc test
-#        run: make test
-
