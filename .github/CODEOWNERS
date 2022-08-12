@@ -6,7 +6,7 @@
 # See https://help.github.com/en/articles/about-code-owners for more information.
 
 # These owners will be the default owners for everything in the repository.
-* @franklychilled
+* @franklychilled @andrewHamIress
 
 # Code Owners File
-/.github/ @franklychilled
+/.github/ @franklychilled @andrewHamIress
