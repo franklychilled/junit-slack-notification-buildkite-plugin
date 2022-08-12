@@ -1,6 +1,6 @@
 import {addStatsToCommit, allStats, combineStats, stats} from "../src/testcaseStats";
 import {describe, expect, it} from "@jest/globals";
-import {JunitResult} from "../src/interfaces/nightWatchResult.interface";
+import {JunitResult} from "../src/interfaces/junitResult.interface";
 
 describe("Convert test cases statistics", () => {
     it("should calculate passed test with testcase stats", async () => {
@@ -18,8 +18,8 @@ describe("Convert test cases statistics", () => {
                             "failures": "0",
                             "hostname": "",
                             "id": "",
-                            "name": "accessibility.login",
-                            "package": "accessibility",
+                            "name": "group.test1",
+                            "package": "group",
                             "skipped": "3",
                             "tests": "1",
                             "time": "4.557",
@@ -29,8 +29,8 @@ describe("Convert test cases statistics", () => {
                             {
                                 "$": {
                                     "assertions": "7",
-                                    "classname": "accessibility.login",
-                                    "name": "accessibility/login - Launch Login page",
+                                    "classname": "group.test1",
+                                    "name": "group/test1 - Launch test1 page",
                                     "time": "4.557"
                                 }
                             }
@@ -44,32 +44,18 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 1, ignored: 0, failed: 0});
 
-        
+
     });
 
     it("should calculate no test with wrong testsuite", async () => {
         const testsuites = {
-                "testsuites": {
-                    "$": {
-                        "errors": "0",
-                        "failures": "0",
-                        "tests": "0"
-                    },
-                    "testsuite": "no an array"
-                }
-            };
-
-        const actual = await stats(testsuites);
-
-        expect(actual).toStrictEqual({passed: 0, ignored: 0, failed: 0});
-
-        
-    });
-
-    it("should calculate no test with no testsuites", async () => {
-        const testsuites = {
             "testsuites": {
-
+                "$": {
+                    "errors": "0",
+                    "failures": "0",
+                    "tests": "0"
+                },
+                "testsuite": "no an array"
             }
         };
 
@@ -77,12 +63,23 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 0, ignored: 0, failed: 0});
 
-        
+
+    });
+
+    it("should calculate no test with no testsuites", async () => {
+        const testsuites = {
+            "testsuites": {}
+        };
+
+        const actual = await stats(testsuites);
+
+        expect(actual).toStrictEqual({passed: 0, ignored: 0, failed: 0});
+
+
     });
 
     it("should fail without testsuites", () => {
-        const testsuites = {
-        };
+        const testsuites = {};
 
         expect(() => stats(testsuites))
             .toThrow();
@@ -103,40 +100,40 @@ describe("Convert test cases statistics", () => {
                             "failures": "1",
                             "hostname": "",
                             "id": "",
-                            "name": "contingency.contingencyTextUser",
-                            "package": "contingency",
+                            "name": "group2.test2",
+                            "package": "group2",
                             "skipped": "0",
                             "tests": "1",
                             "time": "179.4",
                             "timestamp": ""
                         },
                         "system-err": [
-                            "\n            [0;31m Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n            [0;90m at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n            at Function.loadCase (/app/pages/caseLoading.js:73:29)\n            at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n            at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n            at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find\n            journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n        "
+                            "a system-err error here"
                         ],
                         "testcase": [
                             {
                                 "$": {
                                     "assertions": "196",
-                                    "classname": "contingency.contingencyTextUser",
-                                    "name": "contingency/contingencyTextUser - User navigates to Contingency screens for text validation",
+                                    "classname": "group2.test2",
+                                    "name": "group2/test2 name",
                                     "time": "179.4"
                                 },
                                 "failure": [
                                     {
                                         "$": {
-                                            "message": "Timed out while waiting for element <a[href*='/accountOpening']> to be present for 120000 milliseconds. - expected [0;32m\"visible\"[0m but got: [0;31m\"not found\"[0m [0;90m(120004ms)[0m"
+                                            "message": "1st failure msg"
                                         },
-                                        "_": "\n                at SearchInvestments.selectOpenAccount\n                (/app/pages/searchInvestments/searchInvestments.js:502:14)\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                                        "_": "at code.js:502:14"
                                     },
                                     {
                                         "$": {
-                                            "message": "    at SearchInvestments.selectOpenAccount (/app/pages/searchInvestments/searchInvestments.js:502:14)"
+                                            "message": "2nd failure msg"
                                         },
-                                        "_": "\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                                        "_": "at code.js:234:14"
                                     }
                                 ],
                                 "system-out": [
-                                    "\n                [[ATTACHMENT|/reports/contingency/contingencyTextUser/contingency/contingencyTextUser---User-navigates-to-Contingency-screens-for-text-validation_FAILED_Jun-11-2020-181545-GMT+0000-(Coordinated-Universal.png]]\n            "
+                                    "a system-out error here"
                                 ]
                             }
                         ]
@@ -149,7 +146,7 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 0, ignored: 0, failed: 1});
 
-        
+
     });
 
     it("should calculate skipped test with testcase stats", async () => {
@@ -167,7 +164,7 @@ describe("Convert test cases statistics", () => {
                             "failures": "0",
                             "hostname": "",
                             "id": "",
-                            "name": "register.register",
+                            "name": "group3.test3",
                             "package": "register",
                             "skipped": "9",
                             "tests": "0",
@@ -175,13 +172,13 @@ describe("Convert test cases statistics", () => {
                             "timestamp": ""
                         },
                         "system-err": [
-                            "\n      [0;31m  Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
+                            "a system-out error here"
                         ],
                         "testcase": [
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "register/register - Creating a new Self Directed client with an ISA"
+                                    "classname": "group3.test3",
+                                    "name": "testcase 1 name"
                                 },
                                 "skipped": [
                                     ""
@@ -189,8 +186,8 @@ describe("Convert test cases statistics", () => {
                             },
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "Creating a new Self Directed Client who owns a GIA with a manually entered address"
+                                    "classname": "group3.test3",
+                                    "name": "testcase 2 name"
                                 },
                                 "skipped": [
                                     ""
@@ -198,8 +195,8 @@ describe("Convert test cases statistics", () => {
                             },
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "Creating a new Self Directed Client Who owns an ISA and has a Second Correspondance Address"
+                                    "classname": "group3.test3",
+                                    "name": "testcase 3 name"
                                 },
                                 "skipped": [
                                     ""
@@ -207,8 +204,8 @@ describe("Convert test cases statistics", () => {
                             },
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "Creating a new Self Directed Client who has a Second Nationality"
+                                    "classname": "group3.test3",
+                                    "name": "testcase 4 name"
                                 },
                                 "skipped": [
                                     ""
@@ -216,8 +213,8 @@ describe("Convert test cases statistics", () => {
                             },
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "Creating a new Self Directed Client who has a Second Tax Reference and Nationality"
+                                    "classname": "group3.test3",
+                                    "name": "testcase 5 name"
                                 },
                                 "skipped": [
                                     ""
@@ -225,8 +222,8 @@ describe("Convert test cases statistics", () => {
                             },
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "Creating a new Self Directed client who has a SIPP, Manually entered correspondance address and a Joint Building Society Account"
+                                    "classname": "group3.test3",
+                                    "name": "testcase 6 name"
                                 },
                                 "skipped": [
                                     ""
@@ -234,8 +231,8 @@ describe("Convert test cases statistics", () => {
                             },
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "Create a new  Current Partner"
+                                    "classname": "group3.test3",
+                                    "name": "testcase 7 name"
                                 },
                                 "skipped": [
                                     ""
@@ -243,8 +240,8 @@ describe("Convert test cases statistics", () => {
                             },
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "Create a new  Dependant linked to Current Partner"
+                                    "classname": "group3.test3",
+                                    "name": "testcase 8 name"
                                 },
                                 "skipped": [
                                     ""
@@ -252,8 +249,8 @@ describe("Convert test cases statistics", () => {
                             },
                             {
                                 "$": {
-                                    "classname": "register.register",
-                                    "name": "Create a new  Spouse Linked to Currewnt "
+                                    "classname": "group3.test3",
+                                    "name": "testcase 9 name"
                                 },
                                 "skipped": [
                                     ""
@@ -269,7 +266,7 @@ describe("Convert test cases statistics", () => {
 
         expect(actual).toStrictEqual({passed: 0, ignored: 9, failed: 0});
 
-        
+
     });
 
     it("should parse all JSON files with testcase stats", async () => {
@@ -288,8 +285,8 @@ describe("Convert test cases statistics", () => {
                                 "failures": "0",
                                 "hostname": "",
                                 "id": "",
-                                "name": "accessibility.login",
-                                "package": "accessibility",
+                                "name": "group.test1",
+                                "package": "group",
                                 "skipped": "0",
                                 "tests": "1",
                                 "time": "4.557",
@@ -299,8 +296,8 @@ describe("Convert test cases statistics", () => {
                                 {
                                     "$": {
                                         "assertions": "7",
-                                        "classname": "accessibility.login",
-                                        "name": "accessibility/login - Launch Login page",
+                                        "classname": "group.test1",
+                                        "name": "testcase 1 name",
                                         "time": "4.557"
                                     }
                                 }
@@ -323,40 +320,40 @@ describe("Convert test cases statistics", () => {
                                 "failures": "1",
                                 "hostname": "",
                                 "id": "",
-                                "name": "contingency.contingencyTextUser",
-                                "package": "contingency",
+                                "name": "group2.test2",
+                                "package": "group2",
                                 "skipped": "0",
                                 "tests": "1",
                                 "time": "179.4",
                                 "timestamp": ""
                             },
                             "system-err": [
-                                "\n            [0;31m Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n            [0;90m at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n            at Function.loadCase (/app/pages/caseLoading.js:73:29)\n            at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n            at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n            at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find\n            journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n        "
+                                "a system-out error here"
                             ],
                             "testcase": [
                                 {
                                     "$": {
                                         "assertions": "196",
-                                        "classname": "contingency.contingencyTextUser",
-                                        "name": "contingency/contingencyTextUser - User navigates to Contingency screens for text validation",
+                                        "classname": "group2.test2",
+                                        "name": "testcase 1 name",
                                         "time": "179.4"
                                     },
                                     "failure": [
                                         {
                                             "$": {
-                                                "message": "Timed out while waiting for element <a[href*='/accountOpening']> to be present for 120000 milliseconds. - expected [0;32m\"visible\"[0m but got: [0;31m\"not found\"[0m [0;90m(120004ms)[0m"
+                                                "message": "failure msg"
                                             },
-                                            "_": "\n                at SearchInvestments.selectOpenAccount\n                (/app/pages/searchInvestments/searchInvestments.js:502:14)\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                                            "_": "at location"
                                         },
                                         {
                                             "$": {
-                                                "message": "    at SearchInvestments.selectOpenAccount (/app/pages/searchInvestments/searchInvestments.js:502:14)"
+                                                "message": "failure msg"
                                             },
-                                            "_": "\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                                            "_": "at location"
                                         }
                                     ],
                                     "system-out": [
-                                        "\n                [[ATTACHMENT|/reports/contingency/contingencyTextUser/contingency/contingencyTextUser---User-navigates-to-Contingency-screens-for-text-validation_FAILED_Jun-11-2020-181545-GMT+0000-(Coordinated-Universal.png]]\n            "
+                                        "a system-out error here"
                                     ]
                                 }
                             ]
@@ -378,7 +375,7 @@ describe("Convert test cases statistics", () => {
                                 "failures": "0",
                                 "hostname": "",
                                 "id": "",
-                                "name": "register.register",
+                                "name": "group3.test3",
                                 "package": "register",
                                 "skipped": "9",
                                 "tests": "0",
@@ -386,13 +383,13 @@ describe("Convert test cases statistics", () => {
                                 "timestamp": ""
                             },
                             "system-err": [
-                                "\n      [0;31m  Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
+                                "a system-err error here"
                             ],
                             "testcase": [
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "register/register - Creating a new Self Directed client with an ISA"
+                                        "classname": "group3.test3",
+                                        "name": "testcase 1 name"
                                     },
                                     "skipped": [
                                         ""
@@ -400,8 +397,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed Client who owns a GIA with a manually entered address"
+                                        "classname": "group3.test3",
+                                        "name": "testcase 2 name"
                                     },
                                     "skipped": [
                                         ""
@@ -409,8 +406,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed Client Who owns an ISA and has a Second Correspondance Address"
+                                        "classname": "group3.test3",
+                                        "name": "testcase 3 name"
                                     },
                                     "skipped": [
                                         ""
@@ -418,8 +415,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed Client who has a Second Nationality"
+                                        "classname": "group3.test3",
+                                        "name": "testcase 4 name"
                                     },
                                     "skipped": [
                                         ""
@@ -427,8 +424,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed Client who has a Second Tax Reference and Nationality"
+                                        "classname": "group3.test3",
+                                        "name": "testcase 5 name"
                                     },
                                     "skipped": [
                                         ""
@@ -436,8 +433,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed client who has a SIPP, Manually entered correspondance address and a Joint Building Society Account"
+                                        "classname": "group3.test3",
+                                        "name": "testcase 6 name"
                                     },
                                     "skipped": [
                                         ""
@@ -445,8 +442,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Create a new  Current Partner"
+                                        "classname": "group3.test3",
+                                        "name": "testcase 7 name"
                                     },
                                     "skipped": [
                                         ""
@@ -454,8 +451,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Create a new  Dependant linked to Current Partner"
+                                        "classname": "group3.test3",
+                                        "name": "testcase 8 name"
                                     },
                                     "skipped": [
                                         ""
@@ -463,8 +460,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Create a new  Spouse Linked to Currewnt "
+                                        "classname": "group3.test3",
+                                        "name": "testcase 9 name"
                                     },
                                     "skipped": [
                                         ""
@@ -489,21 +486,21 @@ describe("Convert test cases statistics", () => {
                                 "failures": "0",
                                 "hostname": "",
                                 "id": "",
-                                "name": "umbraco.umbracoRegistration",
-                                "package": "umbraco",
+                                "name": "group4.test4",
+                                "package": "group4",
                                 "skipped": "2",
                                 "tests": "0",
                                 "time": "0",
                                 "timestamp": ""
                             },
                             "system-err": [
-                                "\n      [0;31m  Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
+                                "a system-err error here"
                             ],
                             "testcase": [
                                 {
                                     "$": {
-                                        "classname": "umbraco.umbracoRegistration",
-                                        "name": "umbraco/umbracoRegistration 1 - Self Directed  client with an ISA, navigate back then forward"
+                                        "classname": "group4.test4",
+                                        "name": "testcase 1 name"
                                     },
                                     "skipped": [
                                         ""
@@ -511,8 +508,8 @@ describe("Convert test cases statistics", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "umbraco.umbracoRegistration",
-                                        "name": "umbraco/umbracoRegistration 2 - Self Directed  client with an ISA, navigate back then forward"
+                                        "classname": "group4.test4",
+                                        "name": "testcase 2 name"
                                     },
                                     "skipped": [
                                         ""
@@ -550,7 +547,7 @@ describe("Convert test cases statistics", () => {
             }
         ]);
 
-        
+
     });
 
     it("should parse all JSON files with testcase stats even if there is no Suite", async () => {
@@ -558,7 +555,7 @@ describe("Convert test cases statistics", () => {
             {
                 "testsuite": {
                     "$": {
-                        "name": "Chrome Headless 89.0.4389.90 (Linux x86_64)",
+                        "name": "group5.test5",
                         "package": "",
                         "timestamp": "2021-03-31T13:50:26",
                         "id": "0",
@@ -574,7 +571,7 @@ describe("Convert test cases statistics", () => {
                                 {
                                     "$": {
                                         "name": "browser.fullName",
-                                        "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/89.0.4389.90 Safari/537.36"
+                                        "value": "Mozilla/5.0"
                                     }
                                 }
                             ]
@@ -583,20 +580,20 @@ describe("Convert test cases statistics", () => {
                     "testcase": [
                         {
                             "$": {
-                                "name": "Service: performance Overview Service (getPeriodicData) Tests getPeriodicData should return correct response for a single discretionary account, (PERIODIC-01)",
+                                "name": "testcase 1 name",
                                 "time": "0.026",
-                                "classname": "Chrome_Headless_89_0_4389_90_(Linux_x86_64).Service: performance Overview Service (getPeriodicData) Tests getPeriodicData"
+                                "classname": "classname here"
                             }
                         },
                         {
                             "$": {
-                                "name": "Component: Tabs2 Directive Tests should create correct markup for Percentage tab",
+                                "name": "testcase 2 name",
                                 "time": "0.026",
-                                "classname": "Chrome_Headless_89_0_4389_90_(Linux_x86_64).Component: Tabs2 Directive Tests"
+                                "classname": "classname here"
                             },
                             "failure": [
                                 {
-                                    "_": "Error: Unexpected request: GET http://localhost:8144/resourceful/entity/client/1299?fields.0=login_restriction&fields.1=login_restriction_message_text\nNo more request expected\nError: Unexpected request: GET http://localhost:8144/resourceful/entity/client/1299?fields.0=login_restriction&fields.1=login_restriction_message_text\nNo more request expected\n    at $httpBackend (node_modules/angular-mocks/angular-mocks.js:1450:9)\n    at sendReq (node_modules/angular/angular.js:12720:9)\n    at serverRequest (node_modules/angular/angular.js:12461:16)\n    at processQueue (node_modules/angular/angular.js:17330:37)\n    at node_modules/angular/angular.js:17378:27\n    at Scope.$digest (node_modules/angular/angular.js:18515:15)\n    at UserContext.<anonymous> (test/spec/directives/tabs2Tests.js:99:16)\n    at <Jasmine>\n",
+                                    "_": "Error Unexpected",
                                     "$": {
                                         "type": ""
                                     }
@@ -609,7 +606,7 @@ describe("Convert test cases statistics", () => {
             {
                 "testsuite": {
                     "$": {
-                        "name": "HeadlessChrome 88.0.4324 (Linux 0.0.0)",
+                        "name": "group6.test6",
                         "package": "",
                         "timestamp": "2021-03-01T16:22:57",
                         "id": "0",
@@ -625,7 +622,7 @@ describe("Convert test cases statistics", () => {
                                 {
                                     "$": {
                                         "name": "browser.fullName",
-                                        "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/88.0.4324.182 Safari/537.36"
+                                        "value": "Mozilla/5.0"
                                     }
                                 }
                             ]
@@ -634,9 +631,9 @@ describe("Convert test cases statistics", () => {
                     "testcase": [
                         {
                             "$": {
-                                "name": "Service: Umbraco Api initApi should get the umbraco url except if the api name is not defined",
+                                "name": "testcase 1 name",
                                 "time": "0.018",
-                                "classname": "HeadlessChrome_88_0_4324_(Linux_0_0_0).Service: Umbraco Api initApi should get the umbraco url"
+                                "classname": "classname here"
                             }
                         },
                     ]
@@ -703,8 +700,8 @@ describe("Add Statistic to Commit", () => {
                                 "failures": "0",
                                 "hostname": "",
                                 "id": "",
-                                "name": "accessibility.login",
-                                "package": "accessibility",
+                                "name": "group.test1",
+                                "package": "group",
                                 "skipped": "0",
                                 "tests": "1",
                                 "time": "4.557",
@@ -714,8 +711,8 @@ describe("Add Statistic to Commit", () => {
                                 {
                                     "$": {
                                         "assertions": "7",
-                                        "classname": "accessibility.login",
-                                        "name": "accessibility/login - Launch Login page",
+                                        "classname": "group.test1",
+                                        "name": "group/test1 - Launch test1 page",
                                         "time": "4.557"
                                     }
                                 }
@@ -738,40 +735,41 @@ describe("Add Statistic to Commit", () => {
                                 "failures": "1",
                                 "hostname": "",
                                 "id": "",
-                                "name": "contingency.contingencyTextUser",
-                                "package": "contingency",
+                                "name": "group2.test2",
+                                "package": "group2",
                                 "skipped": "0",
                                 "tests": "1",
                                 "time": "179.4",
                                 "timestamp": ""
                             },
                             "system-err": [
-                                "\n            [0;31m Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n            [0;90m at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n            at Function.loadCase (/app/pages/caseLoading.js:73:29)\n            at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n            at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n            at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find\n            journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n        "
+                                "a system-err error here"
                             ],
                             "testcase": [
                                 {
                                     "$": {
                                         "assertions": "196",
-                                        "classname": "contingency.contingencyTextUser",
-                                        "name": "contingency/contingencyTextUser - User navigates to Contingency screens for text validation",
+                                        "classname": "group2.test2",
+                                        "name": "testcase name here",
                                         "time": "179.4"
                                     },
                                     "failure": [
+
                                         {
                                             "$": {
-                                                "message": "Timed out while waiting for element <a[href*='/accountOpening']> to be present for 120000 milliseconds. - expected [0;32m\"visible\"[0m but got: [0;31m\"not found\"[0m [0;90m(120004ms)[0m"
+                                                "message": "failure msg"
                                             },
-                                            "_": "\n                at SearchInvestments.selectOpenAccount\n                (/app/pages/searchInvestments/searchInvestments.js:502:14)\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                                            "_": "at location"
                                         },
                                         {
                                             "$": {
-                                                "message": "    at SearchInvestments.selectOpenAccount (/app/pages/searchInvestments/searchInvestments.js:502:14)"
+                                                "message": "failure msg"
                                             },
-                                            "_": "\n                at Object.contingency/contingencyTextUser - User navigates to Contingency screens for text\n                validation (/app/tests/contingency/contingencyTextUser.js:234:14)\n                at runMicrotasks (<anonymous>)\n            "
+                                            "_": "at location"
                                         }
                                     ],
                                     "system-out": [
-                                        "\n                [[ATTACHMENT|/reports/contingency/contingencyTextUser/contingency/contingencyTextUser---User-navigates-to-Contingency-screens-for-text-validation_FAILED_Jun-11-2020-181545-GMT+0000-(Coordinated-Universal.png]]\n            "
+                                        "a system-out error here"
                                     ]
                                 }
                             ]
@@ -793,7 +791,7 @@ describe("Add Statistic to Commit", () => {
                                 "failures": "0",
                                 "hostname": "",
                                 "id": "",
-                                "name": "register.register",
+                                "name": "group3.test3",
                                 "package": "register",
                                 "skipped": "9",
                                 "tests": "0",
@@ -801,13 +799,13 @@ describe("Add Statistic to Commit", () => {
                                 "timestamp": ""
                             },
                             "system-err": [
-                                "\n      [0;31m  Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
+                                "a system-err error here"
                             ],
                             "testcase": [
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "register/register - Creating a new Self Directed client with an ISA"
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -815,8 +813,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed Client who owns a GIA with a manually entered address"
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -824,8 +822,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed Client Who owns an ISA and has a Second Correspondance Address"
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -833,8 +831,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed Client who has a Second Nationality"
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -842,8 +840,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed Client who has a Second Tax Reference and Nationality"
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -851,8 +849,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Creating a new Self Directed client who has a SIPP, Manually entered correspondance address and a Joint Building Society Account"
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -860,8 +858,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Create a new  Current Partner"
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -869,8 +867,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Create a new  Dependant linked to Current Partner"
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -878,8 +876,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "register.register",
-                                        "name": "Create a new  Spouse Linked to Currewnt "
+                                        "classname": "group3.test3",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -904,21 +902,21 @@ describe("Add Statistic to Commit", () => {
                                 "failures": "0",
                                 "hostname": "",
                                 "id": "",
-                                "name": "umbraco.umbracoRegistration",
-                                "package": "umbraco",
+                                "name": "group4.test4",
+                                "package": "system",
                                 "skipped": "2",
                                 "tests": "0",
                                 "time": "0",
                                 "timestamp": ""
                             },
                             "system-err": [
-                                "\n      [0;31m  Error: Case file not found: ../fixtures/test/client/factFindSingle.json[0m\n[0;90m       at Function.loadCaseFromDisk (/app/pages/caseLoading.js:101:19)\n       at Function.loadCase (/app/pages/caseLoading.js:73:29)\n       at LoginPage.loadCase (/app/pages/basePage.js:254:63)\n       at factFindNavigation (/app/tests/integration/factfindSLMarketingButton.js:29:11)\n       at Object.integration/factfindSLMarketingButton - Single Client logs on to Portal and initiates Fact find journey from Marketing Panel button. (/app/tests/integration/factfindSLMarketingButton.js:13:9)[0m\n    "
+                                "a system-err error here"
                             ],
                             "testcase": [
                                 {
                                     "$": {
-                                        "classname": "umbraco.umbracoRegistration",
-                                        "name": "umbraco/umbracoRegistration 1 - Self Directed  client with an ISA, navigate back then forward"
+                                        "classname": "group4.test4",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""
@@ -926,8 +924,8 @@ describe("Add Statistic to Commit", () => {
                                 },
                                 {
                                     "$": {
-                                        "classname": "umbraco.umbracoRegistration",
-                                        "name": "umbraco/umbracoRegistration 2 - Self Directed  client with an ISA, navigate back then forward"
+                                        "classname": "group4.test4",
+                                        "name": "testcase name here"
                                     },
                                     "skipped": [
                                         ""

@@ -13,7 +13,7 @@ build:
 	docker build --tag=$(IMAGE_NAME):build-${BUILDKITE_BUILD_NUMBER} --build-arg DOCKER_CACHE=${BUILDKITE_PLUGIN_JUNIT_SLACK_NOTIFICATION_DOCKER_CACHE} .
 
 run:
-	docker-compose -f ./docker-compose.yml up --abort-on-container-exit
+	docker-compose run --rm slack-notification
 
 clean:
 	docker-compose down
@@ -22,7 +22,7 @@ prune:
 	docker system prune -f
 
 linter:
-	docker-compose -f ./docker-compose-linter.yml run --rm lint
+	docker-compose run --rm lint
 
 tester:
-	docker-compose -f ./docker-compose-tester.yml run --rm tests
+	docker-compose run --rm tests

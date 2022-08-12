@@ -41,6 +41,4 @@ dist/**/*
 # ignore yarn.lock
 yarn.lock
 
-reports/**/*
-reports
 /.cache_ggshield

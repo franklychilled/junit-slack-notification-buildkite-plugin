@@ -1,6 +1,6 @@
-import { JunitResult } from "../src/interfaces/nightWatchResult.interface";
-import { getColor, getEmoij, getSummary, getSlackMessageAttachments, getText, getTextSummaryLine, sendResultToSlack } from "../src/slackNotification";
-import {beforeEach, describe, expect, it, xit} from "@jest/globals";
+import { JunitResult } from "../src/interfaces/junitResult.interface";
+import { getColor, getEmoji, getSlackMessageAttachments, sendResultToSlack } from "../src/slackNotification";
+import {beforeEach, describe, expect, it} from "@jest/globals";
 
 const _postMessageMock = jest.fn(() => ({promise: true}));
 let mockToken: string;
@@ -42,7 +42,7 @@ describe("Failed test", () => {
   });
 
   it("should return negative emoij", () => {
-    const actual = getEmoij(result);
+    const actual = getEmoji(result);
 
     expect(actual).toBe(":-1: :-1:");
     

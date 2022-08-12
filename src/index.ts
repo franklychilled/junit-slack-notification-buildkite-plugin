@@ -1,4 +1,5 @@
-import { run } from "./runner";
+import {run} from "./runner";
+
 (async () => {
-  await run();
+    await run();
 })();

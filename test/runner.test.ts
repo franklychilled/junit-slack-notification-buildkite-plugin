@@ -1,5 +1,4 @@
 import {describe, expect, it, beforeEach} from "@jest/globals";
-import {sendResultToSlack} from "../src/slackNotification";
 import mockedEnv from "mocked-env";
 
 let restore = mockedEnv({

@@ -1,7 +1,7 @@
-import { JunitResult } from "./interfaces/nightWatchResult.interface";
-import { sendResultToSlack } from "./slackNotification";
-import { parseFiles } from "./xmlParser";
-import { addStatsToCommit } from "./testcaseStats";
+import {JunitResult} from "./interfaces/junitResult.interface";
+import {sendResultToSlack} from "./slackNotification";
+import {parseFiles} from "./xmlParser";
+import {addStatsToCommit} from "./testcaseStats";
 
 export const run = async () => {
     const commit: JunitResult = {

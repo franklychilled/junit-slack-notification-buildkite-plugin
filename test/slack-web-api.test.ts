@@ -38,7 +38,7 @@ describe("When calling sendSlackMessage", () => {
                 }
             ];
 
-        const actual = await sendSlackMessage(slackToken, channel, attachments);
+        await sendSlackMessage(slackToken, channel, attachments);
 
         expect(mockToken).toEqual(slackToken);
         expect(_postMessageMock).toHaveBeenCalledWith({"attachments": attachments, "channel": channel, "text": "" });
