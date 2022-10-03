@@ -19,7 +19,7 @@ load '/usr/local/lib/bats/load.bash'
 
   assert_success
   assert_output --partial "--- :junit: Download the junits XML"
-  assert_output --partial "Download artifacts"
+#  assert_output --partial "Download artifacts"
   assert_output --partial "--- Compile Typescript"
   assert_output --partial "--- Send message to #junit_bot_testing"
 
